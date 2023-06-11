@@ -1,0 +1,8 @@
+To download the PurpurMC server and copy files from ./downloads to ./servers/plugins:
+python mcserver.py copy
+
+To start the Minecraft server with a fixed RAM allocation of 2GB:
+python mcserver.py run
+
+To download the PurpurMC server, copy files from ./downloads to ./servers/plugins, and start the Minecraft server with a fixed RAM allocation of 2GB:
+python mcserver.py copy run

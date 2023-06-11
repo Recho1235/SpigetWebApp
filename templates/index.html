@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plugin Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/minecraft.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='images/background.jpg') }}');
+            background-size: cover;
+            padding-top: 100px;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        p.success {
+            color: green;
+            margin-bottom: 10px;
+        }
+        
+        p.error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        
+        p.error .readable {
+            color: black;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .downloads-link {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .downloads-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recho Spigot Plugin Downloader</h1>
+        {% if download_status == 'success' %}
+            <p class="success">Download Successful!</p>
+        {% elif download_status == 'not_found' %}
+            <p class="error"><span class="readable">Plugin Not Found or Plugin has Updated.</span></p>
+        {% endif %}
+        <form method="POST">
+            <label for="plugin_id">Enter Plugin ID:</label>
+            <input type="text" id="plugin_id" name="plugin_id" required>
+            <button type="submit">Download</button>
+        </form>
+        {% if new_plugins %}
+            <h2>New Plugins</h2>
+            <ul>
+                {% for plugin_id in new_plugins %}
+                    <li>{{ plugin_id }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a class="downloads-link" href="{{ url_for('downloads') }}">Go to Downloads</a>
+    </div>
+</body>
+</html>

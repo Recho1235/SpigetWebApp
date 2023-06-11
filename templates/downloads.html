@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Downloaded Plugins</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/minecraft.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='images/background.jpg') }}');
+            background-size: cover;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            word-wrap: break-word;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .filename {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .download-button,
+        .delete-button {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .download-button:hover,
+        .delete-button:hover {
+            background-color: #0056b3;
+        }
+
+        .goback-button {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.3s ease;
+        }
+
+        .goback-button:hover {
+            text-decoration-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Downloaded Plugins</h1>
+        <ul>
+            {% for file in files %}
+                <li>
+                    <span class="filename">{{ file }}</span>
+                    <a class="download-button" href="{{ url_for('download_file', filename=file) }}">Download</a>
+                    <a class="delete-button" href="javascript:void(0)" onclick="confirmDelete('{{ file }}')">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="goback-button" href="{{ url_for('index') }}">Go Back</a>
+    </div>
+
+    <script>
+        function confirmDelete(file) {
+            if (confirm("Are you sure you want to delete the plugin '" + file + "'?")) {
+                window.location.href = "{{ url_for('delete_file') }}?filename=" + file;
+            }
+        }
+    </script>
+</body>
+</html>

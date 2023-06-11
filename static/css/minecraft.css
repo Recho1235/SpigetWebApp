@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Minecraft&display=swap');
+
+body {
+  background-color: #191919;
+  color: #fff;
+  font-family: 'Minecraft', sans-serif;
+}
+
+.container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.messages {
+  list-style-type: none;
+  padding: 0;
+}
+
+.messages li {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.success {
+  background-color: #00ff00;
+}
+
+.error {
+  background-color: #ff0000;
+}
